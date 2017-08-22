@@ -1,17 +1,17 @@
 <?php
 
-$message = false;
+$message = false;//Если выражение принимает значение FALSE, то PHP проигнорирует инструкцию
 
-if (isset($_REQUEST['name']) and isset($_REQUEST['phone'])) {
+if (isset($_REQUEST['name']) and isset($_REQUEST['phone'])) {//определяет, установлена ли пременная, конструкция if предоставляет возможность условного выполнения фрагментов кода
 
-    $name = $_REQUEST['name'];
+    $name = $_REQUEST['name'];//имя массива
     $phone = $_REQUEST['phone'];
 
     $row = 'Здравствуйте, ' . $name .
         '. Ваш номер: ' . $phone . PHP_EOL;
 
-    file_put_contents('./contacts.txt',
-        $row, FILE_APPEND);
+    file_put_contents('./contacts.txt',//Записать строку в файл
+        $row, FILE_APPEND);//Если файл filename уже существует, данные будут дописаны в конец файла вместо того, чтобы его перезаписать.
 
     $message = 'Спасибо! Мы с Вами свяжемся.';
 }
@@ -25,15 +25,15 @@ if (isset($_REQUEST['name']) and isset($_REQUEST['phone'])) {
 </head>
 <body>
 
-<?php if ($message) : ?>
+<?php //if ($message) : ?><!--конструкция if предоставляет возможность условного выполнения фрагментов кода-->
    <?= $message ?>
-<?php else: ?>
-       <form action="index.php" method="post">
-    <p>Представьтесь</p>
-    <input type="text" name="name">
-    <p>Укажите ваш номер</p>
-    <input type="text" name="phone">
-    <button type="submit">Отправить</button>
+<?php //else: ?><!--else расширяет оператор if, чтобы выполнить выражение, в случае если условие в операторе if равно FALSE-->
+<!--       <form action="index.php" method="post"> Method-Имя метода класса-->
+<!--    <p>Представьтесь</p> Параграф-->
+<!--    <input type="text" name="name"> <input> предназначен для создания текстовых полей, различных кнопок, переключателей и флажков-->
+<!--    <p>Укажите ваш номер</p>Параграф-->
+<!--    <input type="text" name="phone">предназначен для создания текстовых полей, различных кнопок, переключателей и флажков-->
+<!--    <button type="submit">Отправить</button> Кнопка-->
        </form>
 <?php endif; ?>
 
