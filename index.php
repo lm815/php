@@ -71,6 +71,13 @@ if (isset($_REQUEST['name']) and isset($_REQUEST['phone'])) {
                                 </div>
                                 <form class="form-horizontal" action="index.php" method="post">
                                     <div class="form-group">
+                                        <label for="info" class="col-sm-2 control-label">Расскажи о себе</label>
+                                        <div class="col-md-4">
+                                    <textarea rows="4" cols="45" name="text"></textarea>
+                                        </div>
+                                    </div>
+                                <form class="form-horizontal" action="index.php" method="post">
+                                    <div class="form-group">
                                         <label for="phone" class="col-sm-2 control-label">Номер телефона</label>
                                         <div class="col-md-4">
                                             <input type="text" name="phone" pattern="[0-9]{5,10}" class="form-control"
