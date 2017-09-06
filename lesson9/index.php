@@ -37,13 +37,17 @@ require_once './products.php'; //подключили файл с скрипто
                     <span>Цена: <?= $product['price'] ?></span>
                     <p>Описание: <?= $product['description'] ?></p>
                     <img src="<?= $product['image'] ?>" width="200" alt="Фото">
+                    <form>
+                    <button type="submit" class="col-sm">
                     <a href="<?= $product['link'] ?>" target="_blank">Купить</a>
+                    </button>
                     <p>
                         Доступные цвета: <br />
                         <?php foreach ($product['colors'] as $key => $color): ?>
                         <span><?= $key ?>: <?= $color ?>,</span>
                         <?php endforeach; ?>
                     </p>
+                    </form>
                     <p>
                         Доступные цвета: <br />
                         <?= implode(', ', $product['colors']) ?>
