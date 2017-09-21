@@ -4,8 +4,13 @@ spl_autoload_register();
 
 echo '<pre>';
 
-$db = new Database();
-$data = $db->getOne(2);
+$rewiev = new \Models\Rewiev();
+$data = [
+    'name' => 'Мария',
+    'phone' => '5456427468',
+    'text' => 'Хороший сайт',
+];
+$rewiev->create($data);
 print_r($data);
 
 ?>

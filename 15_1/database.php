@@ -3,22 +3,48 @@
 //Базовый класс для работы с базой данных
 class Database
 {
+    public $table;
+
+    public function getTable()
+    {
+        if (strlen($this->table) == 0)
+            throw new ErrorException('Не указана таблица');
+        return $this->table;
+    }
+
 //    Получение одного дркумента по ID
     public function getOne($id)
     {
-        $statement = 'SELECT * FROM products WHERE id=' . $id;
+        $statement = 'SELECT * FROM ' . $this->getTable() . ' WHERE id=' . $id;
         $stmt = $this->pdo()->query($statement);
         return $stmt->fetch();
     }
 
 //Получение всех записей
-    function getAll()
+    public function getAll()
     {
-        $stmt = $this->pdo()->query('SELECT * FROM products');
-        return $stmt->fetch();
+        $stmt = $this->pdo()->query('SELECT * FROM' . $this->getTable());
+        return $stmt->fetchAll();
     }
 
-    function pdo()
+    public function create($data)
+    {
+        $allowed = ['name', 'phone', 'text']; // allowed fields
+        $sql = 'INSERT INTO ' . $this->getTable() . ' SET ' . $this->pdoSet($allowed, $data);
+        $stm = $this->pdo()->prepare($sql);
+        $stm->execute($data);
+    }
+
+    protected function pdoSet($allowed, $values)
+    {
+        $set = '';
+        foreach ($allowed as $field) {
+            if (isset($values[$field])) $set .= $field . "=:$field, ";
+        }
+        return substr($set, 0, -2);
+    }
+
+    protected function pdo()
     {
         $host = '127.0.0.1';
         $db = 'fullstack';
